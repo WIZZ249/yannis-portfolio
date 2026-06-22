@@ -338,12 +338,37 @@
         </div>
       </div>
       <div class="reveal">
-        <div class="contact-form">
-          <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"/></div>
-          <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"/></div>
-          <div class="form-group"><label>Message</label><textarea placeholder="Tell me about your project or opportunity..."></textarea></div>
-          <button class="btn-submit">Send Message &#8594;</button>
-        </div>
+        <form class="contact-form">
+  <div class="form-group">
+      <label>Name</label>
+      <input id="name" type="text" required>
+  </div>
+
+  <div class="form-group">
+      <label>Email</label>
+      <input id="email" type="email" required>
+  </div>
+
+ <form class="contact-form">
+  <div class="form-group">
+    <label>Name</label>
+    <input id="name" type="text" required>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input id="email" type="email" required>
+  </div>
+
+  <div class="form-group">
+    <label>Message</label>
+    <textarea id="message" required></textarea>
+  </div>
+
+  <button type="submit" class="btn-submit">
+    Send Message →
+  </button>
+</form>
       </div>
     </div>
   </div>
@@ -358,17 +383,34 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
+emailjs.init("H2XLco6wn2PCeGSU0");
+
+const form = document.querySelector(".contact-form");
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.send(
+        "service_391vbda",
+        "template_6u28qmr",
+        {
+            from_name: document.getElementById("name").value,
+            from_email: document.getElementById("email").value,
+            message: document.getElementById("message").value
+        }
+    )
+    .then(function() {
+        alert("Message sent successfully!");
+        form.reset();
+    })
+    .catch(function(error) {
+        alert("Failed to send message.");
+        console.error(error);
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+});
 </script>
 </body>
 </html>
