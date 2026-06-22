@@ -386,29 +386,36 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-emailjs.init("H2XLco6wn2PCeGSU0");
+document.addEventListener("DOMContentLoaded", function () {
 
-const form = document.querySelector(".contact-form");
+    emailjs.init({
+        publicKey: "H2XLco6wn2PCeGSU0"
+    });
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
+    const form = document.querySelector(".contact-form");
 
-    emailjs.send(
-        "service_391vbda",
-        "template_6u28qmr",
-        {
-            from_name: document.getElementById("name").value,
-            from_email: document.getElementById("email").value,
-            message: document.getElementById("message").value
-        }
-    )
-    .then(function() {
-        alert("Message sent successfully!");
-        form.reset();
-    })
-    .catch(function(error) {
-        alert("Failed to send message.");
-        console.error(error);
+    if (!form) return;
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        emailjs.send(
+            "service_391vbda",
+            "template_6u28qmr",
+            {
+                from_name: document.getElementById("name").value,
+                from_email: document.getElementById("email").value,
+                message: document.getElementById("message").value
+            }
+        )
+        .then(() => {
+            alert("Message sent successfully!");
+            form.reset();
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("Failed to send message.");
+        });
     });
 });
 </script>
