@@ -1,0 +1,26 @@
+{
+  "name": "ahmed-sulieman-portfolio",
+  "version": "2.0.0",
+  "description": "Professional portfolio of Ahmed Sulieman - IT Engineer & AWS Cloud Practitioner",
+  "author": "Ahmed Sulieman",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx http-server . -p 8000 -c-1",
+    "build": "npm run minify:css && npm run minify:js",
+    "minify:css": "npx cssnano src/styles/main.css -o dist/styles/main.min.css",
+    "minify:js": "npx terser src/scripts/main.js -o dist/scripts/main.min.js -c -m",
+    "lint:html": "npx html-validate index.html",
+    "deploy": "echo 'Deployed to GitHub Pages via Actions'"
+  },
+  "keywords": [
+    "portfolio",
+    "aws",
+    "cloud",
+    "developer",
+    "humanitarian-tech"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WIZZ249/yannis-portfolio.git"
+  }
+}
